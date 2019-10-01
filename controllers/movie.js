@@ -1,4 +1,4 @@
-const {MovieModel} = require('./../models')
+const {MovieModel} = require('./../models/movie')
 const sequelize = require('./../config/config')
 
 class Movie {
@@ -58,7 +58,7 @@ class Movie {
                 LIMIT ${limit}
                 OFFSET ${offset}`
             )
-            .then((movies) => res.json({ result: movies[0], count: items, pages: pages }).status(200))
+            .then((movies) => res.json({ result: movies[0], count: items, page: pages }).status(200))
             .catch((error) => res.json(error).status(500))
         })
         .catch((error) => res.json(error).status(500))
