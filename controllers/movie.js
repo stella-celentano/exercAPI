@@ -1,4 +1,5 @@
 const {MovieModel} = require('./../models')
+const sequelize = require('./../config/config')
 
 class Movie {
     get(req, res) {
@@ -35,7 +36,7 @@ class Movie {
 
         sequelize.query(
             `SELECT
-                CONT(*) AS ITEMS
+                COUNT(*) AS ITEMS
             FROM ARTISTS
             WHERE GENRE ${genre} AND DATESTART ${datestart} AND NAME ${search}`
             
@@ -50,7 +51,7 @@ class Movie {
                     A.ID
                     A.NAME
                     A.COUNTRY
-                    A.DATASTART
+                    A.DATESTART
                 FROM ARTISTS AS A
                 WHERE GENRE ${genre} AND DATESTART ${datestart} AND NAME ${search}
                 ORDER BY ${column} ${order}
