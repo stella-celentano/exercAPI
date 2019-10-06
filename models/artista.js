@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const MovieModel = sequelize.define('MovieModel', {
+    const ArtistaModel = sequelize.define('ArtistaModel', {
 
         ID: {
             type: DataTypes.INTEGER,
@@ -41,5 +41,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     )
 
-        return MovieModel
+        return ArtistaModel
 }

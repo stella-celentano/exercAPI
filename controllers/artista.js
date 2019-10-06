@@ -1,10 +1,10 @@
-const {MovieModel} = require('./../models/movie')
+const {ArtistaModel} = require('./../models/artista')
 const sequelize = require('./../config/config')
 
-class Movie {
+class Artista {
     get(req, res) {
 
-        MovieModel.findAll({raw: true})
+        ArtistaModel.findAll({raw: true})
 
             .then((result) => res.status(200).json(result))
 
@@ -14,14 +14,14 @@ class Movie {
 
     getById(req, res) {
 
-        MovieModel.findByPk(req.params.id)
+        ArtistaModel.findByPk(req.params.id)
 
             .then((result) => res.status(200).json(result))
 
             .catch((error) => res.status(500).json(error))
     }
 
-    getMoviesPages(req, res){
+    getArtistaPages(req, res){
         let limit = 4
         let offset = 0
 
@@ -58,41 +58,41 @@ class Movie {
                 LIMIT ${limit}
                 OFFSET ${offset}`
             )
-            .then((movies) => res.json({ result: movies[0], count: items, page: pages }).status(200))
+            .then((artistas) => res.json({ result: artistas[0], count: items, page: pages }).status(200))
             .catch((error) => res.json(error).status(500))
         })
         .catch((error) => res.json(error).status(500))
 
     }
 
-    createMovie(req, res){
-        MovieModel.create(req.body)
-            .then((movieCreated) => {
+    createArtista(req, res){
+        ArtistaModel.create(req.body)
+            .then((artistaCreated) => {
                 console.log(`[200] - Insert into movies successful [ ${rew.body.NAME} ]`)
-                res.json({message: 'O artista foi criado com sucesso', value: movieCreated}).status(201)
+                res.json({message: 'O artista foi criado com sucesso', value: artistaCreated}).status(201)
             })
             .catch((error) => res.json({message: 'Erro ao criar um artista no banco de dados', error: error}).status(500))
     }
 
-    updateMovie(req, res){
-        MovieModel.update(req.body, {
+    updateArtista(req, res){
+        ArtistaModel.update(req.body, {
             where: {
                 ID: req.params.id
             }
         })
-        .then((movieUpdated) => res.json({message: 'O artista foi atualizado com sucesso', value: movieUpdated}).status(200))
+        .then((artistaUpdated) => res.json({message: 'O artista foi atualizado com sucesso', value: artistaUpdated}).status(200))
         .catch((error) => res.json({message: 'Erro ao atualizar os dados do artista', error: error}).status(500))
     }
 
-    deleteMovie(req, res){
-        MovieModel.destroy({
+    deleteArtista(req, res){
+        ArtistaModel.destroy({
             where: {
                 ID: req.params.id
             }
         })
-        .then((deletedMovie) => res.json({message: 'O artista foi excluído com sucesso', value: deletedMovie}).status(200))
+        .then((deletedArtista) => res.json({message: 'O artista foi excluído com sucesso', value: deletedArtista}).status(200))
         .catch((error) => res.json({message: 'Erro ao excluir dados do artista', error: error}).status(500))
     }
 }
 
-module.exports = new Movie()
+module.exports = new Artista()
