@@ -13,13 +13,15 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.text())
 app.use(bodyParser.json({type: 'application/json'}))
 
-constArtistaRoutes = require('./routes/artista')
+const ArtistaRoutes = require('./routes/artista')
+const AlbumRoutes = require('./routes/album')
 
 app.get('/', function (req, res){
     res.send('Api works')
 })
 
 app.use('/', ArtistaRoutes)
+app.use('/', AlbumRoutes)
 
 app.listen(port, function(){
     console.log(`API listen on port ${port}`)

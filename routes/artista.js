@@ -1,6 +1,6 @@
 const express = require('express')
 
-const MovieController = require('./../controllers/artista')
+const ArtistaController = require('./../controllers/artista')
 
 const route = express.Router()
 
