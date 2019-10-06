@@ -1,4 +1,4 @@
-const {ArtistaModel} = require('./../models/artista')
+const {ArtistaModel} = require('./../models')
 const sequelize = require('./../config/config')
 
 class Artista {

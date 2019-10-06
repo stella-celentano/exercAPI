@@ -1,4 +1,4 @@
-const {AlbumModel} = require('./../models/album')
+const {AlbumModel} = require('./../models')
 const sequelize = require('./../config/config')
 
 class Album {
