@@ -42,16 +42,16 @@ class Album {
             offset = limit*(page-1)
             sequelize.query(
                 `SELECT
-                    AL.ID
-                    AL.NAME
-                    AL.RELEASEDATE
-                    AL.NUMBERTRACKS
+                    AL.ID,
+                    AL.NAME,
+                    AL.RELEASEDATE,
+                    AL.NUMBERTRACKS,
                     AL.RECORDCOMPANY
-                FROM ALBUMS AS A
+                FROM ALBUMS AS AL
                 WHERE RELEASEDATE ${releasedate} AND NAME ${search}
                 ORDER BY ${column} ${order}
                 LIMIT ${limit}
-                OFFSET${offset}`
+                OFFSET ${offset}`
             )
             .then((albums) => res.json({result: albums[0], count: items, page: pages}).status(200))
             .catch((error) => res.json(error).status(500))
@@ -62,7 +62,7 @@ class Album {
     createAlbum(req, res) {
         AlbumModel.create(req.body)
             .then((albumCreated) => {
-                console.log(`[200] - Insert into albums successful [${rew.body.NAME}]`)
+                console.log(`[200] - Insert into albums successful [${req.body.NAME}]`)
                 res.json({message: 'O álbum foi criado com sucesso', value: albumCreated}).status(200)
             })
             .catch((error) => res.json({message: 'Erro ao criar um novo álbum', error: error}).status(500))

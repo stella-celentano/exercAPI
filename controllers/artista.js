@@ -48,9 +48,9 @@ class Artista {
             offset = limit *  (page - 1)
             sequelize.query(
                 `SELECT
-                    A.ID
-                    A.NAME
-                    A.COUNTRY
+                    A.ID,
+                    A.NAME,
+                    A.COUNTRY,
                     A.DATESTART
                 FROM ARTISTS AS A
                 WHERE GENRE ${genre} AND DATESTART ${datestart} AND NAME ${search}
@@ -68,7 +68,7 @@ class Artista {
     createArtista(req, res){
         ArtistaModel.create(req.body)
             .then((artistaCreated) => {
-                console.log(`[200] - Insert into movies successful [ ${rew.body.NAME} ]`)
+                console.log(`[200] - Insert into movies successful [ ${req.body.NAME} ]`)
                 res.json({message: 'O artista foi criado com sucesso', value: artistaCreated}).status(201)
             })
             .catch((error) => res.json({message: 'Erro ao criar um artista no banco de dados', error: error}).status(500))
